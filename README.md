@@ -53,7 +53,7 @@ For Debian, you can follow [this link](https://vitux.com/install-grub-customizer
 
 Install grub themes with `grub-customizer` tool
 
-## NixOS installation
+### NixOS installation
 
 - Add this flake input to your **flake.nix** inputs
 ```nix
