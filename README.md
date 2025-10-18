@@ -53,6 +53,42 @@ For Debian, you can follow [this link](https://vitux.com/install-grub-customizer
 
 Install grub themes with `grub-customizer` tool
 
+## NixOS installation
+
+- Add this flake input to your **flake.nix** inputs
+```nix
+inputs = {
+    grub-theme = {
+      url = "github:xenlism/Grub-themes";
+    };
+
+    # More inputs ...
+};
+```
+
+> [!IMPORTANT]
+> If you switched your theme from systemd-boot to GRUB.
+> You have to change your boot entry in UEFI or BIOS to GRUB.
+> Because NixOS will otherwise still boot into systemd-boot.
+
+- Then set GRUB theme to this package in your **configuration.nix** file
+```nix
+boot.loader.grub.theme = inputs.grub-theme.packages.x86_64-linux.xenlism-grub-theme-nixos-1080p;
+```
+
+> [!NOTE]
+> Just a side note, in case you are using stylix or something that sets GRUB theme for you.
+> You will maybe have to set this option with *lib.mkForce* to make it override other value.
+
+- You can pick from list of distros and resolutions that are present in the [original repo](https://github.com/xenlism/Grub-themes/)
+
+- To view all possible options run `nix flake show github:xenlism/Grub-themes --no-write-lock-file` this will display all possible packages to install
+
+- To change theme you just have to change the package name in **configuration.nix** option like this:
+```nix
+boot.loader.grub.theme = inputs.grub-theme.packages.x86_64-linux.xenlism-grub-theme-[distribution]-[resolution];
+```
+
 ## Preview
 
 | Ubuntu                                                       | Mint Linux                                                   |
